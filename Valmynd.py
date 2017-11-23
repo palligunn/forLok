@@ -30,7 +30,7 @@ def teningur():#if int(guess) == dice: value error
     root.mainloop()
 
 #def annarleikur():
-
+    #annar kóði
 
 #Root = glugginn
 
