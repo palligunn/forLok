@@ -1,17 +1,18 @@
 from random import randrange
 from tkinter import *
+import tkinter.messagebox
 
 
 def checkAnswer():
     dice = randrange(1,7)
     if int(guess) == dice:
-        tkMessageBox.showinfo("Well Done!","Correct!")
+        tkinter.messagebox.showinfo("Well Done!","Correct!")
     if int(guess) > 6:
-        tkMessageBox.showinfo("Error"," Invalid number: try again")
+        tkinter.messagebox.showinfo("Error"," Invalid number: try again")
     elif int(guess) <= 0:
-        tkMessageBox.showinfo("Error"," Invalid number: try again")
+        tkinter.messagebox.showinfo("Error"," Invalid number: try again")
     else:
-        tkMessageBox.showinfo("Incorrect","Incorrect: dice rolled {}.".format(diceRoll))
+        tkinter.messagebox.showinfo("Incorrect","Incorrect: dice rolled {}.".format(diceRoll))
 
 root = Tk()
 

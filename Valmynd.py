@@ -10,18 +10,22 @@ import os
 def teningur():#if int(gisk) == dice: value error
     def rulla():
         tening = randint(1,7)
-        if int(gisk) == int(tening):
-            tkinter.messagebox.showinfo("Well Done!","Correct!")
-        if int(gisk) != int(tening):
-            tkinter.messagebox.showinfo("Error"," Invalid number: try again")
+        if gisk == tening:
+            tkinter.messagebox.showinfo('Rétt!')
+        if gisk != tening:
+            tkinter.messagebox.showinfo('Vitlaust')
 
     root = Tk()
 
+    root.geometry('170x120')#gluggastærð breiddXhæð
+
     Label(root,text="Veldu tölu").pack()
 
-    g = StringVar()
-    tala = Entry(root, textvariable=g).pack()
-    gisk = g.get()
+
+    g = StringVar() #lætur 'g' vera að int
+    tala = Entry(root, textvariable=g).pack()#talan er sleginn inn hér og verður talan = g
+    gisk = g.get()#talan sem er inn í g er sett inn í gisk
+    Label(root,text=tala).pack()
 
     submit = Button(root, text = "Kasta tening", command = rulla).pack()
     root.mainloop()
@@ -49,9 +53,9 @@ btn3 = Button(text="Overwatch")
 btn3.pack()
 
 helpmenu = Menu(menubar, tearoff=0)
-helpmenu.add_command(label="Help Index")
-helpmenu.add_command(label="About...")
-menubar.add_cascade(label="Help", menu=helpmenu)
+helpmenu.add_command(label="Hjálp")
+helpmenu.add_command(label="Um...")
+menubar.add_cascade(label="Hjálp", menu=helpmenu)
 
 root.config(menu=menubar)
 root.mainloop()
