@@ -1,5 +1,6 @@
 # forLok jú
 
+vasareiknir/teningakast
 
 Lokaverkefnið í FOR2TÖ05CU
 Unnið saman af Bryngeir Ari og Pál Gunnar
