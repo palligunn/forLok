@@ -7,19 +7,21 @@ import tkinter.messagebox
 
 
 def teningur():
+    stig =0
     def rulla(numbers):
-        stig = 1000
+
         tening = randint(1,6)
         if numbers == tening:
             tkinter.messagebox.showinfo('Rétt!')
-            stig =stig + 50
+
         else:
             tkinter.messagebox.showinfo('Vitlaust', tening)
-            stig = stig - 50
+
+
 
     root = Tk()
 
-    root.geometry('170x120')#gluggastærð breiddXhæð
+    root.geometry('200x200')#gluggastærð breiddXhæð
 
     #Label(root,text='veldu tölu').pack()
 
