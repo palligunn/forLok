@@ -6,36 +6,37 @@ import tkinter.messagebox
 
 
 
-def teningur():#if int(gisk) == dice: value error
+def teningur():
     def rulla(numbers):
-        tening = randint(1,7)
-        global operator
-        operator = operator + str(numbers)
+        stig = 1000
+        tening = randint(1,6)
         if numbers == tening:
             tkinter.messagebox.showinfo('Rétt!')
-        elif numbers != tening:
-            tkinter.messagebox.showinfo('Vitlaust')
+            stig =stig + 50
+        else:
+            tkinter.messagebox.showinfo('Vitlaust', tening)
+            stig = stig - 50
 
     root = Tk()
 
     root.geometry('170x120')#gluggastærð breiddXhæð
 
-    #Label(root,text="Veldu tölu").pack()
+    #Label(root,text='veldu tölu').pack()
 
-    operator = ""
     text_Input = StringVar()
-
+    one = Label(root,text=stig,bg='white',fg='black').grid(row=3, column=2)
     btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1)).grid(row=1, column=0)
     btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2)).grid(row=1, column=1)
     btn3 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='3',command=lambda: rulla(3)).grid(row=1, column=2)
     btn4 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='4',command=lambda: rulla(4)).grid(row=2, column=0)
     btn5 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='5',command=lambda: rulla(5)).grid(row=2, column=1)
     btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6)).grid(row=2, column=2)
+
     '''
     g = StringVar() #lætur 'g' vera að int
     tala = Entry(root, textvariable=g).pack()#talan er sleginn inn hér og verður talan = g
     gisk = g.get()#talan sem er inn í g er sett inn í gisk
-
+    
     submit = Button(root, text = "Kasta tening", command = rulla).pack()
     '''
     root.mainloop()
