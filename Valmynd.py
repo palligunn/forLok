@@ -7,15 +7,14 @@ import tkinter.messagebox
 
 
 def teningur():
-    stig =0
+    stig =100
     def rulla(numbers):
 
         tening = randint(1,6)
         if numbers == tening:
-            tkinter.messagebox.showinfo('Rétt!')
-
+            #tkinter.messagebox.showinfo('Rétt!')
         else:
-            tkinter.messagebox.showinfo('Vitlaust', tening)
+            #tkinter.messagebox.showinfo('Vitlaust', tening)
 
 
 
