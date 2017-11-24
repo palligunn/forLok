@@ -91,7 +91,7 @@ class Snake(Frame):
         else:
             self.high_score = 0
 
-        self.high_score_label["text"] = "High Score: " + str(self.high_score)
+        self.high_score_label["text"] = "High Score: " + str(self.high_score)#ttest
 
         self.rectangles = [rect1,rect2,rect3]
 
