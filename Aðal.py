@@ -9,13 +9,13 @@ from freegames import square, vector, floor
 def valmynd():
 #_______________________________________________Teningakast________________________________________________________________________________
     def teningakast():
-        stig = 100
+        stig = 100#þarf að laga þetta svo að stigin breytast
 
-        def rulla(numbers):
+        def rulla(numer):
 
             tening = randint(1, 6)
-            if numbers == tening:
-                tkinter.messagebox.showinfo('Rétt!')
+            if numer == tening:
+                tkinter.messagebox.showinfo('Rétt!')#gefur upp nýjan glugga með hvort þú vannst eða tapaðir
             else:
                 tkinter.messagebox.showinfo('Vitlaust', tening)
 
@@ -25,7 +25,7 @@ def valmynd():
 
         # Label(root,text='veldu tölu').pack()
 
-        text_Input = StringVar()
+        text_Input = StringVar()#takkarnir með tölum sem þú getur valið
         one = Label(root, text=stig, bg='white', fg='black').grid(row=3, column=2)
         btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1)).grid(row=1, column=0)
         btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2)).grid(row=1, column=1)
@@ -35,12 +35,11 @@ def valmynd():
         btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6)).grid(row=2, column=2)
 #_____________________________________________________SNAKE_______________________________________________________________________________________
     def leikur1():
-        food = vector(0, 0)
+        punktur = vector(0, 0)#segir hvað hvar er á glugganum(s.s vector)
         snake = [vector(10, 0)]
         aim = vector(0, -10)
 
-        def change(x, y):
-            "Change snake direction."
+        def change(x, y):#breytir áttinni á snákinum
             aim.x = x
             aim.y = y
 
@@ -60,10 +59,10 @@ def valmynd():
 
             snake.append(head)
 
-            if head == food:
+            if head == punktur:
                 print('Snake:', len(snake))
-                food.x = randrange(-15, 15) * 10
-                food.y = randrange(-15, 15) * 10
+                punktur.x = randrange(-15, 15) * 10
+                punktur.y = randrange(-15, 15) * 10
             else:
                 snake.pop(0)
 
@@ -72,7 +71,7 @@ def valmynd():
             for body in snake:
                 square(body.x, body.y, 9, 'black')
 
-            square(food.x, food.y, 9, 'green')
+            square(punktur.x, punktur.y, 9, 'green')
             update()
             ontimer(move, 100)
 
