@@ -294,4 +294,4 @@ class Snake(Frame):
         #self.direction_label["text"] = "ENDED"
 
 
-Snake().mainloop()
+#Snake().mainloop()

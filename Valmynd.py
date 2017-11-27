@@ -1,10 +1,10 @@
 import threading
 import random
-from random import randint
+from random import randint, randrange
 from tkinter import *
 import tkinter.messagebox
-
-
+from turtle import *
+from freegames import square, vector
 
 def teningur():
     stig =100
@@ -12,9 +12,9 @@ def teningur():
 
         tening = randint(1,6)
         if numbers == tening:
-            #tkinter.messagebox.showinfo('Rétt!')
+            tkinter.messagebox.showinfo('Rétt!')
         else:
-            #tkinter.messagebox.showinfo('Vitlaust', tening)
+            tkinter.messagebox.showinfo('Vitlaust', tening)
 
 
 

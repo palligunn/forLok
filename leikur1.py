@@ -1,26 +1,55 @@
+from turtle import *
 from random import randrange
-from tkinter import *
-import tkinter.messagebox
+from freegames import square, vector
 
+food = vector(0, 0)
+snake = [vector(10, 0)]
+aim = vector(0, -10)
 
-def checkAnswer():
-    dice = randrange(1,7)
-    if int(guess) == dice:
-        tkinter.messagebox.showinfo("Well Done!","Correct!")
-    if int(guess) > 6:
-        tkinter.messagebox.showinfo("Error"," Invalid number: try again")
-    elif int(guess) <= 0:
-        tkinter.messagebox.showinfo("Error"," Invalid number: try again")
+def change(x, y):
+    "Change snake direction."
+    aim.x = x
+    aim.y = y
+
+def inside(head):
+    "Return True if head inside boundaries."
+    return -200 < head.x < 190 and -200 < head.y < 190
+
+def move():
+    "Move snake forward one segment."
+    head = snake[-1].copy()
+    head.move(aim)
+
+    if not inside(head) or head in snake:
+        square(head.x, head.y, 9, 'red')
+        update()
+        return
+
+    snake.append(head)
+
+    if head == food:
+        print('Snake:', len(snake))
+        food.x = randrange(-15, 15) * 10
+        food.y = randrange(-15, 15) * 10
     else:
-        tkinter.messagebox.showinfo("Incorrect","Incorrect: dice rolled {}.".format(diceRoll))
+        snake.pop(0)
 
-root = Tk()
+    clear()
 
-Label(root,text="Enter your guess").pack() #parent wasn't specified, added root
+    for body in snake:
+        square(body.x, body.y, 9, 'black')
 
-g = StringVar()
-inputGuess = Entry(root, textvariable=g).pack() #changed variable from v to g
-guess = g.get() #changed variable from v to g
+    square(food.x, food.y, 9, 'green')
+    update()
+    ontimer(move, 100)
 
-submit = Button(root, text = "Roll Dice", command = checkAnswer).pack() #added root as parent
-root.mainloop()
+setup(420, 420, 370, 0)
+hideturtle()
+tracer(False)
+listen()
+onkey(lambda: change(10, 0), 'Right')
+onkey(lambda: change(-10, 0), 'Left')
+onkey(lambda: change(0, 10), 'Up')
+onkey(lambda: change(0, -10), 'Down')
+move()
+done()
