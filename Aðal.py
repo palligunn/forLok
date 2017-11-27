@@ -182,7 +182,7 @@ def valmynd():
     btn2.pack()
     btn3 = Button(text="leikur3", command=leikur3)
     btn3.pack()
-    btn4 = Button(text="HÆTTA MANNFJANDI", command=hætta)
+    btn4 = Button(text="Hætta", command=hætta)
     btn4.pack()
 
     '''
