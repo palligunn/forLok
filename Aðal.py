@@ -6,33 +6,41 @@ import tkinter.messagebox
 from turtle import *
 from freegames import square, vector, floor
 
+#class Leikmadur:
+#    def __init__(self, nafn, lykilord):
+def teningakast():
+    stig = 100  # þarf að laga þetta svo að stigin breytast
+
+    root = Tk()
+
+    root.geometry('200x200')  # gluggastærð breiddXhæð
+
+    # Label(root,text='veldu tölu').pack()
+
+    text_Input = StringVar()  # takkarnir með tölum sem þú getur valið
+    one = Label(root, text=stig, bg='white', fg='black').grid(row=3, column=2)
+    btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1)).grid(row=1, column=0)
+    btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2)).grid(row=1, column=1)
+    btn3 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='3',command=lambda: rulla(3)).grid(row=1, column=2)
+    btn4 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='4',command=lambda: rulla(4)).grid(row=2, column=0)
+    btn5 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='5',command=lambda: rulla(5)).grid(row=2, column=1)
+    btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6)).grid(row=2, column=2)
+
+def rulla(numer):
+    stig = 100
+    tening = randint(1, 6)
+    if numer == tening:
+        tkinter.messagebox.showinfo('Rétt!')#gefur upp nýjan glugga með hvort þú vannst eða tapaðir
+        stig=stig+100
+    else:
+        tkinter.messagebox.showinfo('Vitlaust', tening)
+        stig=stig-50
+
 def valmynd():
+
+
 #_______________________________________________Teningakast________________________________________________________________________________
-    def teningakast():
-        stig = 100#þarf að laga þetta svo að stigin breytast
 
-        def rulla(numer):
-
-            tening = randint(1, 6)
-            if numer == tening:
-                tkinter.messagebox.showinfo('Rétt!')#gefur upp nýjan glugga með hvort þú vannst eða tapaðir
-            else:
-                tkinter.messagebox.showinfo('Vitlaust', tening)
-
-        root = Tk()
-
-        root.geometry('200x200')  # gluggastærð breiddXhæð
-
-        # Label(root,text='veldu tölu').pack()
-
-        text_Input = StringVar()#takkarnir með tölum sem þú getur valið
-        one = Label(root, text=stig, bg='white', fg='black').grid(row=3, column=2)
-        btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1)).grid(row=1, column=0)
-        btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2)).grid(row=1, column=1)
-        btn3 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='3',command=lambda: rulla(3)).grid(row=1, column=2)
-        btn4 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='4',command=lambda: rulla(4)).grid(row=2, column=0)
-        btn5 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='5',command=lambda: rulla(5)).grid(row=2, column=1)
-        btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6)).grid(row=2, column=2)
 #_____________________________________________________SNAKE_______________________________________________________________________________________
     def leikur1():
         punktur = vector(0, 0)#segir hvað hvar er á glugganum(s.s vector)
