@@ -20,21 +20,21 @@ def teningakast():
     text_Input = StringVar()  # takkarnir með tölum sem þú getur valið
     one = Label(root, text=stig, bg='white', fg='black').grid(row=3, column=2)
     root.update_idletasks()
-    btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1,tening)).grid(row=1, column=0)
-    btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2,tening)).grid(row=1, column=1)
-    btn3 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='3',command=lambda: rulla(3,tening)).grid(row=1, column=2)
-    btn4 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='4',command=lambda: rulla(4,tening)).grid(row=2, column=0)
-    btn5 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='5',command=lambda: rulla(5,tening)).grid(row=2, column=1)
-    btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6,tening)).grid(row=2, column=2)
+    btn1 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='1',command=lambda: rulla(1,tening,root,stig)).grid(row=1, column=0)
+    btn2 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='2',command=lambda: rulla(2,tening,root,stig)).grid(row=1, column=1)
+    btn3 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='3',command=lambda: rulla(3,tening,root,stig)).grid(row=1, column=2)
+    btn4 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='4',command=lambda: rulla(4,tening,root,stig)).grid(row=2, column=0)
+    btn5 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='5',command=lambda: rulla(5,tening,root,stig)).grid(row=2, column=1)
+    btn6 = Button(root, padx=4, pady=4, bd=2, fg="black", font=('arial', 20, 'bold'), text='6',command=lambda: rulla(6,tening,root,stig)).grid(row=2, column=2)
     root.update_idletasks()
 
 
-def rulla(numer,tening):
+def rulla(numer,tening,root,stig):
     stig = 100
     if numer == tening:
         tkinter.messagebox.showinfo('Rétt!')#gefur upp nýjan glugga með hvort þú vannst eða tapaðir
         stig=stig+100
-        exit()
+        root.destroy()
     else:
         tkinter.messagebox.showinfo('Vitlaust',tening)
         stig=stig-50
