@@ -18,7 +18,7 @@ class LoginFrame(Frame):
         self.label_1 = Label(self, text="Username")
         self.label_2 = Label(self, text="Password")
 
-        self.entry_1 = Entry(self)
+        self.entry_1 = Entry(self)#comment
         self.entry_2 = Entry(self, show="*")
 
         self.label_1.grid(row=0, sticky=E)
