@@ -3,11 +3,66 @@ from time import sleep
 from random import randint, randrange, choice
 from tkinter import *
 import tkinter.messagebox
+import tkinter.messagebox as tm
 from turtle import *
 from freegames import square, vector, floor
 
 #class Leikmadur:
 #    def __init__(self, nafn, lykilord):
+
+
+class LoginFrame(Frame):
+    def __init__(self, master):
+        super().__init__(master)
+
+        self.label_1 = Label(self, text="Username")
+        self.label_2 = Label(self, text="Password")
+
+        self.entry_1 = Entry(self)
+        self.entry_2 = Entry(self, show="*")
+
+        self.label_1.grid(row=0, sticky=E)
+        self.label_2.grid(row=1, sticky=E)
+        self.entry_1.grid(row=0, column=1)
+        self.entry_2.grid(row=1, column=1)
+
+        self.checkbox = Checkbutton(self, text="Keep me logged in")
+        self.checkbox.grid(columnspan=2)
+
+        self.logbtn = Button(self, text="Login", command = self._login_btn_clickked)
+        self.logbtn.grid(columnspan=2)
+
+        self.logbtn = Button(self, text="nýskráning", command=self._nyskraning_btn_clicked)
+        self.logbtn.grid(columnspan=2)
+
+
+        self.pack()
+
+
+    def _login_btn_clickked(self):
+        #print("Clicked")
+        username = self.entry_1.get()
+        password = self.entry_2.get()
+
+        #print(username, password)
+
+        with open('notendaupplysingar.txt', 'r', encoding='utf-8') as f:
+            if username in f and password in f:
+                tm.showinfo("Login info", "Welcome John")
+                root.destroy()
+                command = valmynd()
+            else:
+                tm.showerror("Login error", "Incorrect username")
+
+
+    def _nyskraning_btn_clicked(self):
+        username = self.entry_1.get()
+        password = self.entry_2.get()
+        with open('notendaupplysingar.txt','a', encoding='utf-8') as f:
+            f.write(username)
+            f.write(password)
+            f.close()
+
 def teningakast():
     stig = StringVar()# þarf að laga þetta svo að stigin breytast
     stig.set(1000)
@@ -64,6 +119,8 @@ def leikur1():
             if not inside(head) or head in snake:
                 square(head.x, head.y, 9, 'red')
                 update()
+                tkinter.messagebox.showinfo('Leik Lokið!')
+                Screen().bye()
                 return
 
             snake.append(head)
@@ -94,91 +151,93 @@ def leikur1():
         onkey(lambda: change(0, -10), 'Down')
         move()
         done()
-def valmynd():
+        turtle.mainloop()
 
 
-#_______________________________________________Teningakast________________________________________________________________________________
 
-#_____________________________________________________SNAKE_______________________________________________________________________________________
-
-
-    def leikur3():
-
-        pattern = []
-        guesses = []
-        tiles = {
-            vector(0, 0): ('red', 'dark red'),
-            vector(0, -200): ('blue', 'dark blue'),
-            vector(-200, 0): ('green', 'dark green'),
-            vector(-200, -200): ('yellow', 'khaki'),
-        }
+def leikur3():
 
 
-        def grid():
-            "Draw grid of tiles."
-            square(0, 0, 200, 'dark red')
-            square(0, -200, 200, 'blue')
-            square(-200, 0, 200, 'green')
-            square(-200, -200, 200, 'yellow')
-            update()
+    pattern = []
+    guesses = []
+    tiles = {
+        vector(0, 0): ('red', 'dark red'),
+        vector(0, -200): ('blue', 'dark blue'),
+        vector(-200, 0): ('green', 'dark green'),
+        vector(-200, -200): ('yellow', 'khaki'),
+    }
 
 
-        def flash(tile):
-            "Flash tile in grid."
-            glow, dark = tiles[tile]
-            square(tile.x, tile.y, 200, glow)
-            update()
-            sleep(0.5)
-            square(tile.x, tile.y, 200, dark)
-            update()
-            sleep(0.5)
+    def grid():
+        "Draw grid of tiles."
+        square(0, 0, 200, 'dark red')
+        square(0, -200, 200, 'blue')
+        square(-200, 0, 200, 'green')
+        square(-200, -200, 200, 'yellow')
+        update()
 
 
-        def grow():
-            "Grow pattern and flash tiles."
-            tile = choice(list(tiles))
-            pattern.append(tile)
+    def flash(tile):
+        "Flash tile in grid."
+        glow, dark = tiles[tile]
+        square(tile.x, tile.y, 200, glow)
+        update()
+        sleep(0.5)
+        square(tile.x, tile.y, 200, dark)
+        update()
+        sleep(0.5)
 
-            for tile in pattern:
-                flash(tile)
 
-            print('Pattern length:', len(pattern))
-            guesses.clear()
+    def grow():
+        "Grow pattern and flash tiles."
+        tile = choice(list(tiles))
+        pattern.append(tile)
 
-
-        def tap(x, y):
-            "Respond to screen tap."
-            onscreenclick(None)
-            x = floor(x, 200)
-            y = floor(y, 200)
-            tile = vector(x, y)
-            index = len(guesses)
-
-            if tile != pattern[index]:
-                exit()
-
-            guesses.append(tile)
+        for tile in pattern:
             flash(tile)
 
-            if len(guesses) == len(pattern):
-                grow()
-
-            onscreenclick(tap)
+        print('Pattern length:', len(pattern))
+        guesses.clear()
 
 
-        def start(x, y):
-            "Start game."
+    def tap(x, y):
+        "Respond to screen tap."
+        onscreenclick(None)
+        x = floor(x, 200)
+        y = floor(y, 200)
+        tile = vector(x, y)
+        index = len(guesses)
+
+        if tile != pattern[index]:
+            tkinter.messagebox.showinfo('Leik Lokið!')
+            Screen().bye()
+
+        guesses.append(tile)
+        flash(tile)
+
+        if len(guesses) == len(pattern):
             grow()
-            onscreenclick(tap)
+
+        onscreenclick(tap)
 
 
-        setup(420, 420, 370, 0)
-        hideturtle()
-        tracer(False)
-        grid()
-        onscreenclick(start)
-        done()
+    def start(x, y):
+        "Start game."
+        grow()
+        onscreenclick(tap)
 
+
+    setup(420, 420, 370, 0)
+    hideturtle()
+    tracer(False)
+    grid()
+    onscreenclick(start)
+    done()
+    turtle.mainloop()
+
+
+
+def valmynd():
     def hætta():
         quit()
 
@@ -191,14 +250,15 @@ def valmynd():
     topFrame=Frame(root)
     one=Label(root,text="Velkominn í leikjasalinn")
     one.pack(fill=X)
+    root.configure(background='green')
 
-    btn1 = Button(text="Teningakast", command=teningakast)
+    btn1 = Button(text="Teningakast", padx=10, pady=10, bg='blue', fg='yellow', command=teningakast)
     btn1.pack()
-    btn2 = Button(text="Snake", command=leikur1)
+    btn2 = Button(text="Snake", padx=26, pady=10, bg='yellow', fg='cyan', command=leikur1)
     btn2.pack()
-    btn3 = Button(text="leikur3", command=leikur3)
+    btn3 = Button(text="Símon segir", padx=24, pady=10, bg='cyan', fg='blue', command=leikur3)
     btn3.pack()
-    btn4 = Button(text="Hætta", command=hætta)
+    btn4 = Button(text="Hætta", padx=25, pady=10, bg='red', fg='black', command=hætta)
     btn4.pack()
 
     '''
@@ -210,4 +270,6 @@ def valmynd():
     root.config(menu=menubar)
     root.mainloop()
 
-valmynd()
+root = Tk()
+lf = LoginFrame(root)
+root.mainloop()
