@@ -47,12 +47,13 @@ class LoginFrame(Frame):
         #print(username, password)
 
         with open('notendaupplysingar.txt', 'r', encoding='utf-8') as f:
-            if username in f and password in f:
-                tm.showinfo("Login info", "Welcome John")
-                root.destroy()
-                command = valmynd()
-            else:
-                tm.showerror("Login error", "Incorrect username")
+            for i in f:
+                if username in f:
+                    tm.showinfo("Login info", "Welcome John")
+                    root.destroy()
+                    command = valmynd()
+                else:
+                    tm.showerror("Login error", "Incorrect username")
 
 
     def _nyskraning_btn_clicked(self):
@@ -60,6 +61,8 @@ class LoginFrame(Frame):
         password = self.entry_2.get()
         with open('notendaupplysingar.txt','a', encoding='utf-8') as f:
             f.write(username)
+            f.write('\n')
+            #reyna að bæta við delimiter
             f.write(password)
             f.close()
 
